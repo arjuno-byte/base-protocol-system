@@ -15,6 +15,19 @@ and core application modules needed to build, test, and run the chain locally.
 The goal of this package is simple: keep the public codebase clean, auditable,
 and easy for contributors to approach.
 
+## Public Network
+
+Public BPS-01 network information is published in
+[`networks/bps-01/`](./networks/bps-01/):
+
+- Chain ID: `bps-01`
+- Genesis: [`networks/bps-01/genesis.json`](./networks/bps-01/genesis.json)
+- Genesis SHA-256:
+  `6ff985ebd1ab87fbf579ac81b1ef1b6c9cff059018a72c5a2af5bdb3c0a184b8`
+- Public RPC: `https://rpc.semarchain.my.id`
+- Full node guide: [`networks/bps-01/full-node.md`](./networks/bps-01/full-node.md)
+- Validator guide: [`networks/bps-01/validator.md`](./networks/bps-01/validator.md)
+
 ## What Is Included
 
 - Chain application wiring in `app/`
@@ -101,6 +114,7 @@ Helpful references:
 - `docs/architecture.md` for a high-level system overview
 - `docs/release-checklist.md` for release preparation
 - `docs/static/openapi.json` for generated API metadata
+- `networks/bps-01/README.md` for public network join information
 
 ## Security
 

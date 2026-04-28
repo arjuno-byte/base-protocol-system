@@ -1,0 +1,37 @@
+{
+  "chain_id": "bps-01",
+  "rpc": {
+    "https": "https://rpc.semarchain.my.id",
+    "status": "https://rpc.semarchain.my.id/status",
+    "net_info": "https://rpc.semarchain.my.id/net_info"
+  },
+  "p2p": {
+    "public_seed_status": "pending",
+    "public_seed_reason": "Raw CometBFT P2P ports are not publicly reachable through the current HTTPS RPC domain.",
+    "seeds": [],
+    "persistent_peers": [],
+    "known_internal_node_ids": [
+      {
+        "moniker": "bps-validator",
+        "node_id": "e0fe663857f7c782e2b3da77f55dfe715647bb62",
+        "role": "validator"
+      },
+      {
+        "moniker": "bps-seed",
+        "node_id": "0c175a40d7e6aafbb4035a431de4ac9613fc7943",
+        "role": "seed"
+      },
+      {
+        "moniker": "bps-rpc",
+        "node_id": "24e9c7069316b650d5cc77873fe176b64837e341",
+        "role": "rpc"
+      }
+    ]
+  },
+  "snapshot": {
+    "status": "not_published",
+    "url": null,
+    "sha256": null
+  },
+  "last_reviewed": "2026-04-29"
+}
