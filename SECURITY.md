@@ -1,45 +1,57 @@
 # Security Policy
 
-BPS Chain is currently in active development and testnet hardening.
-Security reports are handled with priority, especially issues related to consensus safety, key management, node compromise, or remote execution.
+Security reports are taken seriously, especially issues that may affect
+consensus safety, transaction validity, key management, node availability, or
+remote code execution.
 
 ## Reporting a Vulnerability
 
-Do **not** open a public issue for untriaged vulnerabilities.
+Please do not open a public GitHub issue for an untriaged vulnerability.
 
-Use one of these private channels:
+Preferred private reporting channel:
 
-1. GitHub Security Advisory (preferred)
-2. Maintainer security contact (to be configured for production release)
+- GitHub Security Advisory for this repository
+
+If Security Advisories are not available in your fork or mirror, contact the
+maintainers through the private security contact configured by the repository
+owner.
 
 ## What to Include
 
-Please provide:
+Please include as much of the following as possible:
 
-- Vulnerability summary
+- Short vulnerability summary
 - Impact and attack scenario
 - Reproduction steps
-- Affected commit/release
-- Chain ID and block height (if relevant)
-- Minimal proof-of-concept or logs
+- Affected commit, tag, or release
+- Chain ID and block height, if relevant
+- Minimal proof of concept, logs, or transaction data
+- Suggested mitigation, if you already have one
+
+Clear reports help maintainers triage faster.
 
 ## Disclosure Policy
 
-- We follow coordinated disclosure.
-- Public disclosure should wait until triage and patch availability.
-- Credit is provided to reporters unless anonymity is requested.
+- We use coordinated disclosure.
+- Public disclosure should wait until the issue has been triaged and a patch or
+  mitigation is available.
+- Reporter credit is welcome unless anonymity is requested.
+- If exploitation is active, maintainers may prioritize emergency mitigation
+  over a normal release cadence.
 
 ## Secret Handling Rules
 
 Never publish:
 
 - Seed phrases or mnemonics
-- Validator private keys
-- Faucet keys
-- Infrastructure credentials
+- Validator private keys or node keys
+- Faucet keys or operator credentials
+- Private infrastructure details
 
-If a secret is leaked, treat it as compromised and rotate immediately.
+If a secret is leaked, treat it as compromised, rotate it immediately, and audit
+recent activity.
 
 ## Supported Versions
 
-Security support currently targets the active public testnet branch line.
+Security support currently targets the active testnet and release-candidate
+branch line. Older experimental branches are not guaranteed to receive fixes.

@@ -8,7 +8,8 @@ assignees: ""
 
 ## Summary
 
-Provide a concise description of the bug.
+Describe the issue clearly. Include the user-visible symptom and the expected
+behavior if you know it.
 
 ## Environment
 
@@ -37,8 +38,19 @@ What should happen?
 
 What happened instead?
 
+## Impact
+
+- Severity (low / medium / high / critical):
+- Affected users or operators:
+- Workaround available:
+
 ## Logs / Error Output
 
 ```text
 paste logs here
 ```
+
+## Additional Context
+
+Add screenshots, configuration snippets, or related links if helpful. Please do
+not include secrets, private keys, or private infrastructure details.

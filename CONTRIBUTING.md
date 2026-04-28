@@ -1,57 +1,79 @@
 # Contributing to BPS Chain
 
-Thank you for contributing.
-This project welcomes code improvements, tests, documentation updates, and security hardening contributions.
+Thanks for taking the time to improve BPS Chain. Clear bug reports, focused
+patches, tests, documentation improvements, and security hardening are all very
+welcome.
 
-## Workflow
+## How to Work With the Project
 
-1. Open an issue for bugs, proposals, or large design changes.
-2. Create a branch from the default branch.
-3. Keep changes focused and atomic.
-4. Run validation before opening a pull request.
-5. Open a pull request with a clear summary and verification steps.
+1. Open an issue for bugs, proposals, or larger design changes.
+2. Create a branch from `main`.
+3. Keep the change focused on one concern.
+4. Add or update tests when behavior changes.
+5. Run the relevant validation commands.
+6. Open a pull request with a clear summary, rationale, and verification notes.
 
-## Pull Request Expectations
+Small, well-tested pull requests are easier to review and merge.
 
-- Use descriptive commit messages.
-- Include rationale, not only code changes.
-- Add or update tests when behavior changes.
-- Update documentation for user-facing or operator-facing changes.
-- Keep unrelated refactors out of the same PR.
+## Engineering Expectations
+
+- Prefer simple, explicit code over clever abstractions.
+- Keep consensus, state, CLI, and module logic in their existing boundaries.
+- Avoid unrelated refactors in feature or bug-fix pull requests.
+- Update documentation when commands, APIs, parameters, or operator behavior
+  changes.
+- Include migration notes when a change affects state, genesis, or node
+  operation.
 
 ## Validation
 
-Run at minimum:
+Run the unit test suite before submitting:
 
 ```bash
 go test ./...
 ```
 
-Recommended full checks:
+Recommended full validation:
 
 ```bash
 make test
 make lint
 ```
 
-## Security and Secrets
+For protobuf or generated-code changes, also confirm the generated files are
+consistent and review the diff carefully.
+
+## Commit and Pull Request Style
+
+Use short, descriptive commit messages. The pull request description should
+answer:
+
+- What changed?
+- Why is it needed?
+- How was it validated?
+- What is the operational or security impact?
+
+## Security and Secret Handling
 
 Never commit:
 
 - Mnemonics or seed phrases
-- Private keys or validator keys
+- Private keys, validator keys, or node keys
 - API tokens, credentials, or `.env` secrets
-- Runtime snapshots or private infrastructure data
+- Runtime snapshots, node databases, or private infrastructure data
 
-If sensitive data is accidentally exposed, rotate and revoke it immediately.
+If sensitive data is accidentally exposed, treat it as compromised and rotate it
+immediately.
 
 ## Bug Report Quality
 
-Please include:
+Helpful bug reports include:
 
 - OS and toolchain versions
 - Commit hash or release version
 - Chain ID
-- Block height (if relevant)
+- Block height, if relevant
 - Full reproduction steps
-- Exact logs or errors
+- Exact logs or error output
+
+Thanks for helping keep the project reliable, readable, and safe to operate.

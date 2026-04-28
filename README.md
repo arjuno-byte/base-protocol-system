@@ -1,79 +1,111 @@
 # BPS Chain
 
-BPS Chain is a sovereign Layer-1 blockchain built with Cosmos SDK and CometBFT.
-This repository is the public source package for the chain node and core modules.
+BPS Chain is a sovereign Layer 1 blockchain built with the Cosmos SDK and
+CometBFT. This repository contains the public node source, protocol definitions,
+and core application modules needed to build, test, and run the chain locally.
 
-## Repository Scope
+The goal of this package is simple: keep the public codebase clean, auditable,
+and easy for contributors to approach.
 
-This repository intentionally contains source code only:
+## What Is Included
 
-- Chain application and modules (`app/`, `x/`)
-- Node command and runtime entrypoints (`cmd/`)
-- Protocol definitions (`proto/`)
-- Build/test/lint configuration
+- Chain application wiring in `app/`
+- Node command entrypoint in `cmd/bpsd/`
+- Custom module code in `x/bps/`
+- Protocol definitions in `proto/`
+- OpenAPI generation output in `docs/static/openapi.json`
+- Build, test, lint, issue, and release automation
+- Local development helper scripts in `scripts/`
 
-Excluded from this repository:
+## What Is Not Included
 
-- Production server IP addresses
-- Infrastructure inventory and private topology
-- Secrets, keys, and operator credentials
-- Runtime node data and local build artifacts
+This repository intentionally excludes operational material that should not live
+in a public source tree:
+
+- Private keys, validator keys, mnemonics, or node key material
+- Production server inventory, private topology, and deployment credentials
+- Runtime node databases, snapshots, logs, and local build artifacts
+- Wallet applications, public infrastructure services, and operator-only notes
 
 ## Requirements
 
-- Go `1.25+`
-- Ignite CLI (optional, for local scaffold/dev workflows)
+- Go `1.25.6` or newer compatible Go 1.25 patch release
+- `make`
+- A C toolchain supported by Cosmos SDK dependencies
+- Ignite CLI for protobuf regeneration and scaffold-oriented development
 
 ## Quick Start
+
+Install the node binary:
 
 ```bash
 make install
 bpsd version
 ```
 
-Run unit tests:
+Run the test suite:
 
 ```bash
 go test ./...
 ```
 
-Run project checks via Makefile:
+Run the standard project checks:
 
 ```bash
 make test
 make lint
 ```
 
-Start local chain with helper scripts:
+Start a local development chain:
 
 ```bash
 bash scripts/run_local_node.sh
 ```
 
+On Windows PowerShell:
+
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\run_local_node.ps1
 ```
 
-## Development
+## Repository Layout
 
-Local development config lives in `config.yml`.
-No production endpoint or infrastructure IP is embedded in this repository.
-Optional environment variable placeholders are provided in `.env.example`.
+```text
+app/                 Cosmos SDK application wiring
+cmd/bpsd/            Node binary entrypoint and CLI commands
+docs/                Generated API docs and templates
+proto/               Protobuf service and message definitions
+scripts/             Local development helpers
+testutil/            Test helpers
+x/bps/               BPS module keeper, types, and module registration
+```
+
+## Local Configuration
+
+`config.yml` is intended for local development only. The sample accounts and
+validators are not production identities.
+
+`.env.example` documents optional environment variables for local tooling. Copy
+it to `.env` only for local experiments, and never commit real secrets.
+
+Helpful references:
+
+- `docs/architecture.md` for a high-level system overview
+- `docs/release-checklist.md` for release preparation
+- `docs/static/openapi.json` for generated API metadata
 
 ## Security
 
-Please read `SECURITY.md` before reporting vulnerabilities.
+Security reports are welcome and should be handled privately. Please read
+`SECURITY.md` before reporting a vulnerability.
+
 Do not open public issues for untriaged security findings.
 
 ## Contributing
 
-Please read `CONTRIBUTING.md` for coding, review, and validation expectations.
+Contributions are welcome. Please read `CONTRIBUTING.md` for the expected
+workflow, validation steps, and pull request quality bar.
 
 ## License
 
-Licensed under the MIT License. See `LICENSE` for details.
-
----
-
-Package generated from a private monorepo and sanitized for public open-source release.
-Date: 2026-04-28.
+BPS Chain is licensed under the MIT License. See `LICENSE` for details.
