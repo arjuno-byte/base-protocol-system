@@ -1,0 +1,42 @@
+# Editor and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Build and release artifacts
+release/
+build/
+dist/
+out/
+bin/
+coverage/
+node_modules/
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.dot
+*.log
+*.ign
+*.tar
+*.tar.gz
+*.zip
+
+# Runtime node state
+data/
+**/data/
+config/node_key.json
+config/priv_validator_key.json
+config/priv_validator_state.json
+**/keyring-test/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.db

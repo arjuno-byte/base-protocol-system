@@ -1,0 +1,13 @@
+syntax = "proto3";
+package bps.bps.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/antasena/bps/x/bps/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "bps/x/bps/Params";
+  option (gogoproto.equal) = true;
+}
