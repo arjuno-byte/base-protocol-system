@@ -1,8 +1,6 @@
 # BPS-01 Public Network
 
-`bps-01` is the first public BPS network profile. This folder is the canonical
-place for public node operators to find the chain ID, genesis file, checksum,
-RPC endpoint, and operator guides.
+`bps-01` is the first public BPS network profile. This folder is the canonical place for public node operators to find the chain ID, genesis file, checksum, peer metadata, and operator guides.
 
 ## Network Profile
 
@@ -13,37 +11,36 @@ RPC endpoint, and operator guides.
 | Native display denom | `BPS` |
 | Base denom | `ubps` |
 | Denom precision | `1 BPS = 1,000,000 ubps` |
-| Public RPC | `https://rpc.semarchain.my.id` |
-| RPC status | `https://rpc.semarchain.my.id/status` |
-| RPC net info | `https://rpc.semarchain.my.id/net_info` |
+| Core P2P | raw TCP `IP_PUBLIC:26656` |
+| Core RPC | private/local only `tcp://127.0.0.1:26657` |
+| Public RPC | Disabled from core; optional app layer only |
+| Cloudflare/HTTPS | Not used for P2P/core node sync |
 | Genesis file | [`genesis.json`](./genesis.json) |
 | Genesis SHA-256 | `6ff985ebd1ab87fbf579ac81b1ef1b6c9cff059018a72c5a2af5bdb3c0a184b8` |
-| Faucet | `https://faucet.semarchain.my.id/faucet` |
-| Explorer | `https://explorer.semarchain.my.id` |
-| Status page | `https://status.semarchain.my.id` |
+| Tokenomics | [`../../TOKENOMICS.md`](../../TOKENOMICS.md) |
 | Public snapshot | [`snapshot.md`](./snapshot.md) |
-| Public P2P seed | Pending upstream TCP route for `seed.semarchain.my.id` |
 
-## Current Join Status
+## Current Join Model
 
-Public RPC, faucet, explorer, status page, and snapshot access are online.
-Public P2P seed access is not advertised yet because the current public domain
-is HTTPS/RPC oriented and raw CometBFT P2P ports are not reachable through it.
+BPS uses Bitcoin-style networking for the core node layer:
 
-This means operators can build the node, verify genesis, restore the published
-snapshot, and prepare configuration from this repository. A one-command live
-sync from the public network should wait until a public seed address is
-announced here.
+- Full nodes join through raw CometBFT TCP peers, formatted as `<node_id>@IP_PUBLIC:26656`.
+- RPC stays local on the node host for operator tooling and optional app services.
+- Faucet, explorer, status page, public RPC proxy, and snapshots are optional external services.
+- Domains, HTTPS, Cloudflare Tunnel, and reverse proxies are never used as P2P seeds or persistent peers.
+
+When public peers are announced, they will appear in [`peers.json`](./peers.json) as raw TCP addresses only.
 
 ## Files
 
 - [`genesis.json`](./genesis.json): canonical BPS-01 genesis.
 - [`genesis.sha256`](./genesis.sha256): SHA-256 checksum for `genesis.json`.
 - [`peers.json`](./peers.json): current public peer/seed status.
-- [`endpoints.json`](./endpoints.json): machine-readable public endpoints.
-- [`snapshot.md`](./snapshot.md): public snapshot details and restore steps.
+- [`endpoints.json`](./endpoints.json): machine-readable core/app-layer endpoint model.
+- [`snapshot.md`](./snapshot.md): optional snapshot policy and restore steps.
 - [`full-node.md`](./full-node.md): full node setup guide.
 - [`validator.md`](./validator.md): validator setup guide.
+- [`../../docs/bitcoin-style-networking.md`](../../docs/bitcoin-style-networking.md): core networking rules.
 
 ## Verify Genesis
 
@@ -67,14 +64,13 @@ The hash must match:
 6ff985ebd1ab87fbf579ac81b1ef1b6c9cff059018a72c5a2af5bdb3c0a184b8
 ```
 
-## Check Public RPC
+## Local Health Check
+
+Run on the node host:
 
 ```bash
-curl -fsS https://rpc.semarchain.my.id/status
-curl -fsS https://rpc.semarchain.my.id/net_info
-curl -fsS https://faucet.semarchain.my.id/healthz
-curl -fsS https://explorer.semarchain.my.id/healthz
-curl -fsS https://status.semarchain.my.id/healthz
+bpsd status --node tcp://127.0.0.1:26657
+curl -fsS http://127.0.0.1:26657/status
 ```
 
 Expected chain ID:
@@ -83,11 +79,25 @@ Expected chain ID:
 bps-01
 ```
 
+## P2P Connectivity Check
+
+Run from outside the node network after firewall/NAT is open:
+
+```bash
+nc -vz IP_PUBLIC 26656
+```
+
+PowerShell:
+
+```powershell
+Test-NetConnection IP_PUBLIC -Port 26656
+```
+
 ## Operator Notes
 
-- Do not use the RPC HTTPS domain as a P2P seed unless a public P2P DNS record
-  and port are explicitly listed in `peers.json`.
-- Do not reuse example keys or local development wallets for production or
-  validator operations.
+- Do not expose validator RPC publicly.
+- Do not use public RPC URLs as P2P peers.
+- Do not use domains, HTTPS, or Cloudflare as core node dependencies.
+- Do not reuse example keys or local development wallets for production or validator operations.
 - Keep validator keys offline or on a hardened host.
 - Treat any leaked mnemonic, private key, or node key as compromised.

@@ -1,20 +1,18 @@
 # BPS-01 Snapshot
 
-This page documents the current public BPS-01 node snapshot.
+Snapshots are optional app-layer bootstrap artifacts. They are not part of core peer discovery and they do not replace raw TCP P2P sync.
 
-## Current Snapshot
+## Current Snapshot Policy
 
 | Field | Value |
 | --- | --- |
 | Network | `bps-01` |
-| Snapshot height | `19200` |
-| Snapshot URL | `https://status.semarchain.my.id/snapshots/bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz` |
-| SHA-256 | `a05c3b3394ad70091da3afa546bc7c3113f5f0e86016d3ee5c4ca87493762308` |
-| SHA-256 file | `https://status.semarchain.my.id/snapshots/bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz.sha256` |
-| Size | `76285294` bytes |
+| Status | Operator-provided optional artifact |
+| Snapshot URL | Not hardcoded in core repo |
+| SHA-256 | Must be published beside each snapshot |
+| SHA-256 file | Must be published beside each snapshot |
 
-The snapshot contains node runtime `data/` only. It does not include validator
-private keys, node keys, mnemonics, server credentials, or config files.
+A valid snapshot contains node runtime `data/` only. It must not include validator private keys, node keys, mnemonics, server credentials, or config files.
 
 ## Restore
 
@@ -26,14 +24,15 @@ sudo systemctl stop bpsd || true
 
 For a user-level node, stop the matching user service instead.
 
-Download and verify:
+Download and verify an operator-published snapshot:
 
 ```bash
-SNAPSHOT="bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz"
-curl -L -o "$SNAPSHOT" \
-  "https://status.semarchain.my.id/snapshots/$SNAPSHOT"
-curl -L -o "$SNAPSHOT.sha256" \
-  "https://status.semarchain.my.id/snapshots/$SNAPSHOT.sha256"
+SNAPSHOT_URL="<optional-snapshot-url>"
+SHA256_URL="<optional-snapshot-sha256-url>"
+SNAPSHOT="$(basename "$SNAPSHOT_URL")"
+
+curl -L -o "$SNAPSHOT" "$SNAPSHOT_URL"
+curl -L -o "$SNAPSHOT.sha256" "$SHA256_URL"
 sha256sum -c "$SNAPSHOT.sha256"
 ```
 
@@ -45,11 +44,8 @@ rm -rf "$BPS_HOME/data"
 tar -xzf "$SNAPSHOT" -C "$BPS_HOME"
 ```
 
-Then start the node again after `genesis.json`, `config.toml`, and `app.toml`
-are configured for BPS-01.
+Then start the node again after `genesis.json`, `config.toml`, and `app.toml` are configured for BPS-01.
 
 ## Important
 
-A snapshot speeds up local state bootstrap, but the node still needs working P2P
-peers to continue following new blocks. Public raw P2P seed publication is still
-pending upstream TCP exposure.
+A snapshot speeds up local state bootstrap, but the node still needs working raw TCP P2P peers to continue following new blocks. Use `<node_id>@IP_PUBLIC:26656` peers only; do not use HTTPS, Cloudflare, public RPC, faucet, explorer, or status URLs as peers.

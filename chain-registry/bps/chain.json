@@ -37,24 +37,13 @@
     ]
   },
   "apis": {
-    "rpc": [
-      {
-        "address": "https://rpc.semarchain.my.id",
-        "provider": "BPS"
-      }
-    ]
+    "rpc": []
   },
-  "explorers": [
-    {
-      "kind": "bps-simple",
-      "url": "https://explorer.semarchain.my.id",
-      "tx_page": "https://explorer.semarchain.my.id/tx/${txHash}",
-      "account_page": "https://explorer.semarchain.my.id/account/${accountAddress}"
-    }
-  ],
+  "explorers": [],
   "peers": {
     "seeds": [],
-    "persistent_peers": []
+    "persistent_peers": [],
+    "peer_format": "<node_id>@IP_PUBLIC:26656"
   },
-  "notes": "Public raw P2P seed publication is pending upstream TCP exposure. See networks/bps-01/peers.json."
+  "notes": "Core P2P uses raw TCP IP_PUBLIC:26656. Core RPC is private at tcp://127.0.0.1:26657. Public RPC, faucet, explorer, status page, and snapshots are optional app-layer services."
 }

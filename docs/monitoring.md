@@ -1,32 +1,29 @@
 # Monitoring
 
-BPS-01 public monitoring focuses on chain liveness and endpoint availability.
+Core BPS monitoring should read local/private RPC and raw TCP P2P status.
 
-## Public Checks
+## Local Node Checks
 
 ```bash
-curl -fsS https://rpc.semarchain.my.id/status
-curl -fsS https://rpc.semarchain.my.id/net_info
-curl -fsS https://faucet.semarchain.my.id/healthz
-curl -fsS https://explorer.semarchain.my.id/healthz
-curl -fsS https://status.semarchain.my.id/healthz
+bpsd status --node tcp://127.0.0.1:26657
+curl -fsS http://127.0.0.1:26657/status
+curl -fsS http://127.0.0.1:26657/net_info
 ```
 
-## Key Metrics
+## External P2P Check
 
-- Latest block height.
-- `catching_up` status.
-- Peer count.
-- RPC availability.
-- Faucet health.
-- Explorer health.
-- Snapshot availability.
+Run from outside the node network:
 
-## Operator Alert Suggestions
+```bash
+nc -vz IP_PUBLIC 26656
+```
 
-- RPC down for more than 2 minutes.
-- Block height not increasing for more than 5 minutes.
-- `catching_up=true` on public RPC.
-- Peer count drops unexpectedly.
-- Disk usage above 80%.
-- Validator missed blocks above the local threshold.
+PowerShell:
+
+```powershell
+Test-NetConnection IP_PUBLIC -Port 26656
+```
+
+## Optional App Checks
+
+If an operator publishes optional app-layer services, monitor those service URLs separately. They are not used for P2P sync, seed discovery, persistent peers, or genesis configuration.

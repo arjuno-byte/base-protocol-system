@@ -1,18 +1,17 @@
 {
   "chain_id": "bps-01",
-  "rpc": {
-    "https": "https://rpc.semarchain.my.id",
-    "status": "https://rpc.semarchain.my.id/status",
-    "net_info": "https://rpc.semarchain.my.id/net_info"
+  "last_reviewed": "2026-04-29",
+  "core_networking": {
+    "model": "bitcoin_style_raw_tcp_p2p",
+    "p2p_laddr": "tcp://0.0.0.0:26656",
+    "p2p_external_address": "IP_PUBLIC:26656",
+    "rpc_laddr": "tcp://127.0.0.1:26657",
+    "public_rpc": "disabled_from_core",
+    "cloudflare": "not_used_for_p2p_or_core"
   },
   "p2p": {
-    "public_seed_status": "pending_upstream_port_forward_or_public_vps",
-    "public_seed_dns": "seed.semarchain.my.id",
-    "public_seed_reason": "The BPS host firewall allows seed/RPC P2P ports, but raw CometBFT TCP still needs a public TCP route. HTTPS/Cloudflare Tunnel endpoints cannot be used as P2P seeds.",
-    "public_tcp_ports_required": [
-      28656,
-      29656
-    ],
+    "peer_format": "<node_id>@IP_PUBLIC:26656",
+    "public_tcp_port_required": 26656,
     "seeds": [],
     "persistent_peers": [],
     "known_internal_node_ids": [
@@ -31,15 +30,15 @@
         "node_id": "24e9c7069316b650d5cc77873fe176b64837e341",
         "role": "rpc"
       }
-    ]
+    ],
+    "notes": "Public peers must be announced as raw TCP CometBFT addresses. HTTPS, Cloudflare, public RPC, faucet, explorer, and status domains are app-layer only."
   },
-  "snapshot": {
-    "status": "published",
-    "height": 19200,
-    "url": "https://status.semarchain.my.id/snapshots/bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz",
-    "sha256": "a05c3b3394ad70091da3afa546bc7c3113f5f0e86016d3ee5c4ca87493762308",
-    "sha256_url": "https://status.semarchain.my.id/snapshots/bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz.sha256",
-    "size_bytes": 76285294
-  },
-  "last_reviewed": "2026-04-29"
+  "optional_snapshot": {
+    "status": "operator_provided_optional",
+    "height": null,
+    "url": null,
+    "sha256": null,
+    "sha256_url": null,
+    "notes": "Snapshots may be published by operators as optional bootstrap artifacts, but sync correctness still depends on verified genesis and raw TCP P2P peers."
+  }
 }

@@ -1,37 +1,46 @@
-# Public Network Status
+# Network Status
 
-This document summarizes public BPS-01 services.
+This document summarizes the BPS-01 core networking status and optional app-layer service model.
 
-## Live Services
+## Core Services
 
-| Service | URL | Status |
+| Service | Address | Status |
 | --- | --- | --- |
-| RPC | `https://rpc.semarchain.my.id` | Online |
-| RPC status | `https://rpc.semarchain.my.id/status` | Online |
-| RPC net info | `https://rpc.semarchain.my.id/net_info` | Online |
-| Faucet | `https://faucet.semarchain.my.id/faucet` | Online |
-| Faucet health | `https://faucet.semarchain.my.id/healthz` | Online |
-| Explorer | `https://explorer.semarchain.my.id` | Online |
-| Explorer health | `https://explorer.semarchain.my.id/healthz` | Online |
-| Status page | `https://status.semarchain.my.id` | Online |
-| Status health | `https://status.semarchain.my.id/healthz` | Online |
-| Snapshot | `https://status.semarchain.my.id/snapshots/bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz` | Published |
+| P2P | `IP_PUBLIC:26656` raw TCP | Required for public node sync |
+| RPC | `tcp://127.0.0.1:26657` | Private/local only |
+| Public RPC | Disabled from core | Optional app layer only |
+| Cloudflare/HTTPS | Not used for P2P/core | App layer only if operator enables it |
+
+## Optional App Layer
+
+Faucet, explorer, public RPC proxy, status page, and snapshots may be published by operators, but they are not dependencies for node-to-node sync or peer discovery.
 
 ## P2P Status
 
-Raw CometBFT P2P is not the same as HTTPS RPC. The BPS host firewall has seed
-and RPC P2P ports prepared, but public raw TCP still requires an upstream port
-forward, public VPS, or equivalent TCP ingress.
+Current public P2P metadata is tracked in [`networks/bps-01/peers.json`](../networks/bps-01/peers.json). Peers must be published in raw CometBFT format:
 
-Current public P2P status is tracked in
-[`networks/bps-01/peers.json`](../networks/bps-01/peers.json).
+```text
+<node_id>@IP_PUBLIC:26656
+```
 
 ## Verification Commands
 
+Local RPC on the node host:
+
 ```bash
-curl -fsS https://rpc.semarchain.my.id/status
-curl -fsS https://rpc.semarchain.my.id/net_info
-curl -fsS https://faucet.semarchain.my.id/healthz
-curl -fsS https://explorer.semarchain.my.id/healthz
-curl -fsS https://status.semarchain.my.id/healthz
+bpsd status --node tcp://127.0.0.1:26657
+curl -fsS http://127.0.0.1:26657/status
+curl -fsS http://127.0.0.1:26657/net_info
+```
+
+External P2P from another network:
+
+```bash
+nc -vz IP_PUBLIC 26656
+```
+
+PowerShell:
+
+```powershell
+Test-NetConnection IP_PUBLIC -Port 26656
 ```

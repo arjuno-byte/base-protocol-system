@@ -24,12 +24,12 @@ Public BPS-01 network information is published in
 - Genesis: [`networks/bps-01/genesis.json`](./networks/bps-01/genesis.json)
 - Genesis SHA-256:
   `6ff985ebd1ab87fbf579ac81b1ef1b6c9cff059018a72c5a2af5bdb3c0a184b8`
-- Public RPC: `https://rpc.semarchain.my.id`
-- Faucet: `https://faucet.semarchain.my.id/faucet`
-- Explorer: `https://explorer.semarchain.my.id`
-- Status page: `https://status.semarchain.my.id`
+- Core P2P: raw TCP `IP_PUBLIC:26656`
+- Core RPC: private/local only `tcp://127.0.0.1:26657`
+- Public RPC/faucet/explorer/status: optional app layer, not required for core sync
 - Snapshot: [`networks/bps-01/snapshot.md`](./networks/bps-01/snapshot.md)
 - Tokenomics: [`TOKENOMICS.md`](./TOKENOMICS.md)
+- Networking model: [`docs/bitcoin-style-networking.md`](./docs/bitcoin-style-networking.md)
 - Full node guide: [`networks/bps-01/full-node.md`](./networks/bps-01/full-node.md)
 - Validator guide: [`networks/bps-01/validator.md`](./networks/bps-01/validator.md)
 
@@ -118,6 +118,7 @@ it to `.env` only for local experiments, and never commit real secrets.
 Helpful references:
 
 - `docs/architecture.md` for a high-level system overview
+- `docs/bitcoin-style-networking.md` for raw TCP P2P and private RPC rules
 - `docs/network-status.md` for public endpoint status
 - `docs/reproducible-builds.md` for repeatable local builds
 - `docs/release-process.md` for release and artifact rules

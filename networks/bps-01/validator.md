@@ -19,7 +19,8 @@ a hardened host, secure key custody, monitoring, and a tested recovery process.
 | Bond denom | `ubps` |
 | Display denom | `BPS` |
 | Genesis SHA-256 | `6ff985ebd1ab87fbf579ac81b1ef1b6c9cff059018a72c5a2af5bdb3c0a184b8` |
-| Public RPC | `https://rpc.semarchain.my.id` |
+| Core P2P | raw TCP `IP_PUBLIC:26656` |
+| Core RPC | private/local only `tcp://127.0.0.1:26657` |
 
 ## Create Operator Key
 
@@ -57,7 +58,7 @@ bpsd tx staking create-validator \
 ## Monitor
 
 ```bash
-bpsd status
+bpsd status --node tcp://127.0.0.1:26657
 bpsd query staking validator "$(bpsd keys show validator --bech val -a)"
 ```
 
@@ -66,6 +67,8 @@ bpsd query staking validator "$(bpsd keys show validator --bech val -a)"
 - SSH root login disabled.
 - Password SSH login disabled.
 - Firewall only exposes required ports.
+- Public firewall exposes P2P `26656/tcp` only.
+- RPC `26657/tcp` stays bound to `127.0.0.1`.
 - Validator key backed up and encrypted.
 - Node key and validator key are not committed to Git.
 - Monitoring alerts cover missed blocks, low peers, disk usage, and service
