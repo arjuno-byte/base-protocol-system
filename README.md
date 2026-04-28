@@ -25,6 +25,7 @@ Public BPS-01 network information is published in
 - Genesis SHA-256:
   `6ff985ebd1ab87fbf579ac81b1ef1b6c9cff059018a72c5a2af5bdb3c0a184b8`
 - Public RPC: `https://rpc.semarchain.my.id`
+- Tokenomics: [`TOKENOMICS.md`](./TOKENOMICS.md)
 - Full node guide: [`networks/bps-01/full-node.md`](./networks/bps-01/full-node.md)
 - Validator guide: [`networks/bps-01/validator.md`](./networks/bps-01/validator.md)
 
@@ -114,6 +115,7 @@ Helpful references:
 - `docs/architecture.md` for a high-level system overview
 - `docs/release-checklist.md` for release preparation
 - `docs/static/openapi.json` for generated API metadata
+- `TOKENOMICS.md` for public BPS supply and genesis allocation details
 - `networks/bps-01/README.md` for public network join information
 
 ## Security
