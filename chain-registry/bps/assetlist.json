@@ -1,0 +1,23 @@
+{
+  "chain_name": "bps",
+  "assets": [
+    {
+      "description": "BPS is the native token of Base Protocol System.",
+      "denom_units": [
+        {
+          "denom": "ubps",
+          "exponent": 0
+        },
+        {
+          "denom": "BPS",
+          "exponent": 6
+        }
+      ],
+      "base": "ubps",
+      "name": "BPS",
+      "display": "BPS",
+      "symbol": "BPS",
+      "type_asset": "sdk.coin"
+    }
+  ]
+}

@@ -18,24 +18,30 @@ RPC endpoint, and operator guides.
 | RPC net info | `https://rpc.semarchain.my.id/net_info` |
 | Genesis file | [`genesis.json`](./genesis.json) |
 | Genesis SHA-256 | `6ff985ebd1ab87fbf579ac81b1ef1b6c9cff059018a72c5a2af5bdb3c0a184b8` |
-| Public snapshot | Not published yet |
-| Public P2P seed | Pending public P2P port exposure |
+| Faucet | `https://faucet.semarchain.my.id/faucet` |
+| Explorer | `https://explorer.semarchain.my.id` |
+| Status page | `https://status.semarchain.my.id` |
+| Public snapshot | [`snapshot.md`](./snapshot.md) |
+| Public P2P seed | Pending upstream TCP route for `seed.semarchain.my.id` |
 
 ## Current Join Status
 
-Public RPC is online and can be used for read-only status checks. Public P2P
-seed access is not advertised yet because the current public domain is HTTPS/RPC
-oriented and raw P2P ports are not reachable through it.
+Public RPC, faucet, explorer, status page, and snapshot access are online.
+Public P2P seed access is not advertised yet because the current public domain
+is HTTPS/RPC oriented and raw CometBFT P2P ports are not reachable through it.
 
-This means operators can build the node and prepare configuration from this
-repository, but a one-command sync from the public network should wait until a
-public seed address is announced here.
+This means operators can build the node, verify genesis, restore the published
+snapshot, and prepare configuration from this repository. A one-command live
+sync from the public network should wait until a public seed address is
+announced here.
 
 ## Files
 
 - [`genesis.json`](./genesis.json): canonical BPS-01 genesis.
 - [`genesis.sha256`](./genesis.sha256): SHA-256 checksum for `genesis.json`.
 - [`peers.json`](./peers.json): current public peer/seed status.
+- [`endpoints.json`](./endpoints.json): machine-readable public endpoints.
+- [`snapshot.md`](./snapshot.md): public snapshot details and restore steps.
 - [`full-node.md`](./full-node.md): full node setup guide.
 - [`validator.md`](./validator.md): validator setup guide.
 
@@ -66,6 +72,9 @@ The hash must match:
 ```bash
 curl -fsS https://rpc.semarchain.my.id/status
 curl -fsS https://rpc.semarchain.my.id/net_info
+curl -fsS https://faucet.semarchain.my.id/healthz
+curl -fsS https://explorer.semarchain.my.id/healthz
+curl -fsS https://status.semarchain.my.id/healthz
 ```
 
 Expected chain ID:

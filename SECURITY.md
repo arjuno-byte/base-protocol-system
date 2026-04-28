@@ -12,6 +12,8 @@ Preferred private reporting channel:
 
 - GitHub Security Advisory for this repository
 
+Public bug bounty scope and limitations are documented in `BUG_BOUNTY.md`.
+
 If Security Advisories are not available in your fork or mirror, contact the
 maintainers through the private security contact configured by the repository
 owner.

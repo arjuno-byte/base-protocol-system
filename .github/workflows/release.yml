@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   release:
@@ -31,6 +32,24 @@ jobs:
           DO_NOT_TRACK: 1
           GOFLAGS: "-buildvcs=false"
 
+      - name: Generate release checksums
+        if: ${{ steps.vars.outputs.should_release == 'true' }}
+        run: |
+          cd release
+          sha256sum * > SHA256SUMS
+
+      - name: Install cosign
+        if: ${{ steps.vars.outputs.should_release == 'true' }}
+        uses: sigstore/cosign-installer@v3
+
+      - name: Sign release assets with Sigstore
+        if: ${{ steps.vars.outputs.should_release == 'true' }}
+        run: |
+          for asset in release/*; do
+            [ -f "$asset" ] || continue
+            cosign sign-blob --yes --bundle "${asset}.bundle" "$asset"
+          done
+
       - name: Delete rolling latest prerelease
         uses: dev-drprasad/delete-tag-and-release@v0.2.1
         if: ${{ steps.vars.outputs.is_release_type_latest == 'true' }}
@@ -45,7 +64,8 @@ jobs:
         if: ${{ steps.vars.outputs.should_release == 'true' }}
         with:
           tag_name: ${{ steps.vars.outputs.tag_name }}
-          files: release/*
+          files: |
+            release/*
           prerelease: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

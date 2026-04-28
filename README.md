@@ -25,6 +25,10 @@ Public BPS-01 network information is published in
 - Genesis SHA-256:
   `6ff985ebd1ab87fbf579ac81b1ef1b6c9cff059018a72c5a2af5bdb3c0a184b8`
 - Public RPC: `https://rpc.semarchain.my.id`
+- Faucet: `https://faucet.semarchain.my.id/faucet`
+- Explorer: `https://explorer.semarchain.my.id`
+- Status page: `https://status.semarchain.my.id`
+- Snapshot: [`networks/bps-01/snapshot.md`](./networks/bps-01/snapshot.md)
 - Tokenomics: [`TOKENOMICS.md`](./TOKENOMICS.md)
 - Full node guide: [`networks/bps-01/full-node.md`](./networks/bps-01/full-node.md)
 - Validator guide: [`networks/bps-01/validator.md`](./networks/bps-01/validator.md)
@@ -38,6 +42,7 @@ Public BPS-01 network information is published in
 - OpenAPI generation output in `docs/static/openapi.json`
 - Build, test, lint, issue, and release automation
 - Local development helper scripts in `scripts/`
+- Public network, tokenomics, release, and operator policy documents
 
 ## What Is Not Included
 
@@ -113,10 +118,22 @@ it to `.env` only for local experiments, and never commit real secrets.
 Helpful references:
 
 - `docs/architecture.md` for a high-level system overview
+- `docs/network-status.md` for public endpoint status
+- `docs/reproducible-builds.md` for repeatable local builds
+- `docs/release-process.md` for release and artifact rules
+- `docs/governance.md` for upgrade policy
+- `docs/validator-onboarding.md` for validator requirements
+- `docs/slashing.md` for validator risk notes
+- `docs/rpc-policy.md` for public RPC usage rules
+- `docs/monitoring.md` for operator monitoring checks
+- `docs/disaster-recovery.md` for incident response policy
+- `docs/audit-status.md` for current audit status
+- `docs/chain-registry.md` for ecosystem metadata
 - `docs/release-checklist.md` for release preparation
 - `docs/static/openapi.json` for generated API metadata
 - `TOKENOMICS.md` for public BPS supply and genesis allocation details
 - `networks/bps-01/README.md` for public network join information
+- `BUG_BOUNTY.md` for responsible disclosure scope
 
 ## Security
 

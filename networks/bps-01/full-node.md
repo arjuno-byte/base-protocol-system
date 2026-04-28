@@ -9,6 +9,7 @@ This guide prepares a BPS full node for the `bps-01` public network.
 - `make`, `curl`, `jq`
 - Open disk space for chain data
 - Public P2P seed address once announced in [`peers.json`](./peers.json)
+- Optional public snapshot from [`snapshot.md`](./snapshot.md)
 
 ## Build
 
@@ -50,9 +51,9 @@ Read the current public peer status:
 cat networks/bps-01/peers.json | jq '.p2p'
 ```
 
-If `seeds` is empty, public P2P seed access has not been announced yet. Wait for
-an updated `peers.json` before expecting a new node to sync from the public
-network.
+If `seeds` is empty, public P2P seed access has not been announced yet. You can
+still build, initialize, verify genesis, restore a snapshot, and query public
+RPC, but the node will not follow new blocks until it has working P2P peers.
 
 When a seed is announced, set it in `config.toml`:
 
@@ -112,5 +113,33 @@ bps-01
 
 ## Snapshot
 
-No public snapshot is currently published. Start from genesis unless
-[`peers.json`](./peers.json) announces a snapshot URL.
+A public RPC-node data snapshot is published in [`snapshot.md`](./snapshot.md).
+Use it only after verifying the SHA-256 checksum.
+
+```bash
+SNAPSHOT="bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz"
+curl -L -o "$SNAPSHOT" \
+  "https://status.semarchain.my.id/snapshots/$SNAPSHOT"
+curl -L -o "$SNAPSHOT.sha256" \
+  "https://status.semarchain.my.id/snapshots/$SNAPSHOT.sha256"
+sha256sum -c "$SNAPSHOT.sha256"
+
+sudo systemctl stop bpsd || true
+rm -rf "$BPS_HOME/data"
+tar -xzf "$SNAPSHOT" -C "$BPS_HOME"
+sudo systemctl start bpsd
+```
+
+The snapshot does not include private keys, node keys, mnemonics, or config
+files.
+
+## From Zero To Sync
+
+1. Install `bpsd` with `make install`.
+2. Initialize `BPS_HOME`.
+3. Copy and verify BPS-01 `genesis.json`.
+4. Set minimum gas price and indexer settings.
+5. Restore the verified snapshot if desired.
+6. Configure public P2P seeds once published in [`peers.json`](./peers.json).
+7. Start the `bpsd` systemd service.
+8. Confirm `catching_up=false` and network `bps-01`.

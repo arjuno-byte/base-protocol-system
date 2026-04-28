@@ -1,0 +1,45 @@
+{
+  "chain_id": "bps-01",
+  "network_name": "BPS-01",
+  "last_reviewed": "2026-04-29",
+  "endpoints": {
+    "rpc": {
+      "url": "https://rpc.semarchain.my.id",
+      "status": "https://rpc.semarchain.my.id/status",
+      "net_info": "https://rpc.semarchain.my.id/net_info",
+      "status_checked": "online"
+    },
+    "faucet": {
+      "url": "https://faucet.semarchain.my.id/faucet",
+      "health": "https://faucet.semarchain.my.id/healthz",
+      "status_checked": "online"
+    },
+    "explorer": {
+      "url": "https://explorer.semarchain.my.id",
+      "health": "https://explorer.semarchain.my.id/healthz",
+      "status_checked": "online"
+    },
+    "status_page": {
+      "url": "https://status.semarchain.my.id",
+      "health": "https://status.semarchain.my.id/healthz",
+      "status_checked": "online"
+    }
+  },
+  "p2p": {
+    "public_seed_dns": "seed.semarchain.my.id",
+    "public_seed_status": "pending_upstream_port_forward_or_public_vps",
+    "host_firewall_ready": true,
+    "public_tcp_ports_required": [28656, 29656],
+    "seeds": [],
+    "persistent_peers": [],
+    "notes": "RPC, faucet, explorer, and status are public over HTTPS. Raw CometBFT P2P still requires a public TCP route that is not proxied through HTTPS/Cloudflare Tunnel."
+  },
+  "snapshot": {
+    "status": "published",
+    "height": 19200,
+    "url": "https://status.semarchain.my.id/snapshots/bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz",
+    "sha256": "a05c3b3394ad70091da3afa546bc7c3113f5f0e86016d3ee5c4ca87493762308",
+    "sha256_url": "https://status.semarchain.my.id/snapshots/bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz.sha256",
+    "size_bytes": 76285294
+  }
+}

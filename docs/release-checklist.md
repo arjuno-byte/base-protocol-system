@@ -29,6 +29,8 @@ Use this checklist before publishing a release candidate or production release.
   format.
 - Built binaries are attached to the GitHub release when applicable.
 - Checksums are generated for release assets.
+- Sigstore/cosign bundles are generated for release assets when GitHub OIDC is
+  available.
 - Release notes include upgrade notes and known limitations.
 
 ## Post Release

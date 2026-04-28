@@ -6,8 +6,13 @@
     "net_info": "https://rpc.semarchain.my.id/net_info"
   },
   "p2p": {
-    "public_seed_status": "pending",
-    "public_seed_reason": "Raw CometBFT P2P ports are not publicly reachable through the current HTTPS RPC domain.",
+    "public_seed_status": "pending_upstream_port_forward_or_public_vps",
+    "public_seed_dns": "seed.semarchain.my.id",
+    "public_seed_reason": "The BPS host firewall allows seed/RPC P2P ports, but raw CometBFT TCP still needs a public TCP route. HTTPS/Cloudflare Tunnel endpoints cannot be used as P2P seeds.",
+    "public_tcp_ports_required": [
+      28656,
+      29656
+    ],
     "seeds": [],
     "persistent_peers": [],
     "known_internal_node_ids": [
@@ -29,9 +34,12 @@
     ]
   },
   "snapshot": {
-    "status": "not_published",
-    "url": null,
-    "sha256": null
+    "status": "published",
+    "height": 19200,
+    "url": "https://status.semarchain.my.id/snapshots/bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz",
+    "sha256": "a05c3b3394ad70091da3afa546bc7c3113f5f0e86016d3ee5c4ca87493762308",
+    "sha256_url": "https://status.semarchain.my.id/snapshots/bps-01-rpc-snapshot-19200-20260428T212502Z.tar.gz.sha256",
+    "size_bytes": 76285294
   },
   "last_reviewed": "2026-04-29"
 }

@@ -1,0 +1,60 @@
+{
+  "chain_name": "bps",
+  "status": "live",
+  "network_type": "testnet",
+  "pretty_name": "BPS Chain",
+  "chain_id": "bps-01",
+  "bech32_prefix": "bps",
+  "daemon_name": "bpsd",
+  "node_home": "$HOME/.bpsd",
+  "key_algos": [
+    "secp256k1"
+  ],
+  "slip44": 118,
+  "fees": {
+    "fee_tokens": [
+      {
+        "denom": "ubps",
+        "fixed_min_gas_price": 0.001,
+        "low_gas_price": 0.001,
+        "average_gas_price": 0.0025,
+        "high_gas_price": 0.005
+      }
+    ]
+  },
+  "staking": {
+    "staking_tokens": [
+      {
+        "denom": "ubps"
+      }
+    ]
+  },
+  "codebase": {
+    "git_repo": "https://github.com/arjuno-byte/base-protocol-system",
+    "recommended_version": "v1.0.0-rc4",
+    "compatible_versions": [
+      "v1.0.0-rc4"
+    ]
+  },
+  "apis": {
+    "rpc": [
+      {
+        "address": "https://rpc.semarchain.my.id",
+        "provider": "BPS"
+      }
+    ]
+  },
+  "explorers": [
+    {
+      "kind": "bps-simple",
+      "url": "https://explorer.semarchain.my.id",
+      "tx_page": "https://explorer.semarchain.my.id/tx/${txHash}",
+      "account_page": "https://explorer.semarchain.my.id/account/${accountAddress}"
+    }
+  ],
+  "peers": {
+    "seeds": [],
+    "persistent_peers": []
+  },
+  "notes": "Public raw P2P seed publication is pending upstream TCP exposure. See networks/bps-01/peers.json."
+}
