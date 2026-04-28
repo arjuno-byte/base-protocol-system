@@ -1,4 +1,12 @@
-# BPS Chain
+<p align="center">
+  <img src="docs/assets/bps-coin.png" width="108" alt="BPS coin icon">
+</p>
+
+<h1 align="center">BPS Chain</h1>
+
+<p align="center">
+  Base Protocol System public blockchain source.
+</p>
 
 BPS Chain is a sovereign Layer 1 blockchain built with the Cosmos SDK and
 CometBFT. This repository contains the public node source, protocol definitions,
