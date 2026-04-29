@@ -25,6 +25,7 @@ bpsd version
 ```bash
 export BPS_HOME="$HOME/.bpsd"
 export BPS_CHAIN_ID="bps-01"
+export BPS_PUBLIC_PEER="17c0469a361fe1e9ecbe11058f8d5cb030992e82@13.229.41.228:26656"
 
 bpsd init "my-bps-full-node" --chain-id "$BPS_CHAIN_ID" --home "$BPS_HOME"
 cp networks/bps-01/genesis.json "$BPS_HOME/config/genesis.json"
@@ -90,7 +91,7 @@ sed -i.bak -E 's|^minimum-gas-prices = ".*"|minimum-gas-prices = "0.001ubps"|' "
 sed -i.bak -E 's|^indexer = ".*"|indexer = "kv"|' "$BPS_HOME/config/config.toml"
 ```
 
-Final target in `config.toml`:
+Final target in `config.toml` before adding public peers:
 
 ```toml
 [rpc]
@@ -103,11 +104,16 @@ seeds = ""
 persistent_peers = ""
 ```
 
-If a seed or persistent peer is announced in [`peers.json`](./peers.json), use only raw TCP format:
+Use the published BPS-01 public P2P peer from [`peers.json`](./peers.json):
 
 ```bash
-PEERS="<node_id>@IP_PUBLIC:26656"
-sed -i.bak -E "s|^persistent_peers = \".*\"|persistent_peers = \"$PEERS\"|" "$BPS_HOME/config/config.toml"
+sed -i.bak -E "s|^persistent_peers = \".*\"|persistent_peers = \"$BPS_PUBLIC_PEER\"|" "$BPS_HOME/config/config.toml"
+```
+
+The current public peer is:
+
+```text
+17c0469a361fe1e9ecbe11058f8d5cb030992e82@13.229.41.228:26656
 ```
 
 Never use HTTPS, Cloudflare, faucet, explorer, status, or public RPC URLs as P2P peers.
@@ -168,12 +174,14 @@ External P2P from another network:
 
 ```bash
 nc -vz IP_PUBLIC 26656
+nc -vz 13.229.41.228 26656
 ```
 
 PowerShell:
 
 ```powershell
 Test-NetConnection IP_PUBLIC -Port 26656
+Test-NetConnection 13.229.41.228 -Port 26656
 ```
 
 The expected network is:
@@ -212,6 +220,6 @@ The snapshot must not include private keys, node keys, mnemonics, or config file
 4. Configure P2P raw TCP `IP_PUBLIC:26656` and private RPC `127.0.0.1:26657`.
 5. Open/forward only `26656/tcp` publicly.
 6. Restore a verified snapshot if desired.
-7. Configure raw TCP peers once published in [`peers.json`](./peers.json).
+7. Configure the raw TCP public peer from [`peers.json`](./peers.json).
 8. Start the `bpsd` systemd service.
 9. Confirm `catching_up=false` and network `bps-01` from local RPC.

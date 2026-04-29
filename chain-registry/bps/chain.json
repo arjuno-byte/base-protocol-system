@@ -42,8 +42,10 @@
   "explorers": [],
   "peers": {
     "seeds": [],
-    "persistent_peers": [],
+    "persistent_peers": [
+      "17c0469a361fe1e9ecbe11058f8d5cb030992e82@13.229.41.228:26656"
+    ],
     "peer_format": "<node_id>@IP_PUBLIC:26656"
   },
-  "notes": "Core P2P uses raw TCP IP_PUBLIC:26656. Core RPC is private at tcp://127.0.0.1:26657. Public RPC, faucet, explorer, status page, and snapshots are optional app-layer services."
+  "notes": "Core P2P uses raw TCP IP_PUBLIC:26656. Current BPS-01 public peer is 17c0469a361fe1e9ecbe11058f8d5cb030992e82@13.229.41.228:26656. Core RPC is private at tcp://127.0.0.1:26657. Public RPC, faucet, explorer, status page, and snapshots are optional app-layer services."
 }

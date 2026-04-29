@@ -7,4 +7,6 @@ Files:
 - [`../chain-registry/bps/chain.json`](../chain-registry/bps/chain.json)
 - [`../chain-registry/bps/assetlist.json`](../chain-registry/bps/assetlist.json)
 
-The metadata is intentionally minimal until public P2P seeds are available.
+The metadata includes the current raw TCP public P2P peer for node sync. Core
+RPC remains local/private; public RPC, faucet, explorer, status pages, and
+snapshots are optional app-layer services.

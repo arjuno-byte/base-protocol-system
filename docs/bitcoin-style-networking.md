@@ -37,6 +37,12 @@ If a public seed or peer is announced, it must use CometBFT raw TCP format:
 <node_id>@IP_PUBLIC:26656
 ```
 
+Current BPS-01 public peer:
+
+```text
+17c0469a361fe1e9ecbe11058f8d5cb030992e82@13.229.41.228:26656
+```
+
 Do not use `https://...`, DNS-only HTTPS endpoints, Cloudflare Tunnel URLs, or public RPC URLs as P2P peers.
 
 ## Firewall
@@ -61,12 +67,14 @@ From outside the node network:
 
 ```bash
 nc -vz IP_PUBLIC 26656
+nc -vz 13.229.41.228 26656
 ```
 
 PowerShell from outside the node network:
 
 ```powershell
 Test-NetConnection IP_PUBLIC -Port 26656
+Test-NetConnection 13.229.41.228 -Port 26656
 ```
 
 On the node host:

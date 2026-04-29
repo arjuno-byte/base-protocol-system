@@ -21,10 +21,16 @@ This guide defines the public onboarding expectations for BPS validators.
 
 ## Public Join Status
 
-Public P2P seed publication is still pending upstream raw TCP exposure. New
-external validators should wait for `seeds` or `persistent_peers` in
-[`networks/bps-01/peers.json`](../networks/bps-01/peers.json) before expecting
-live sync from the public network.
+Public P2P is available through the raw TCP peer published in
+[`networks/bps-01/peers.json`](../networks/bps-01/peers.json). New external
+validators should sync a full node first using the published `persistent_peers`
+entry before creating or broadcasting validator transactions.
+
+Current public peer:
+
+```text
+17c0469a361fe1e9ecbe11058f8d5cb030992e82@13.229.41.228:26656
+```
 
 ## Validator Command Pattern
 

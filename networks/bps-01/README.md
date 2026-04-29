@@ -12,6 +12,7 @@
 | Base denom | `ubps` |
 | Denom precision | `1 BPS = 1,000,000 ubps` |
 | Core P2P | raw TCP `IP_PUBLIC:26656` |
+| Public P2P peer | `17c0469a361fe1e9ecbe11058f8d5cb030992e82@13.229.41.228:26656` |
 | Core RPC | private/local only `tcp://127.0.0.1:26657` |
 | Public RPC | Disabled from core; optional app layer only |
 | Cloudflare/HTTPS | Not used for P2P/core node sync |
@@ -29,7 +30,7 @@ BPS uses Bitcoin-style networking for the core node layer:
 - Faucet, explorer, status page, public RPC proxy, and snapshots are optional external services.
 - Domains, HTTPS, Cloudflare Tunnel, and reverse proxies are never used as P2P seeds or persistent peers.
 
-When public peers are announced, they will appear in [`peers.json`](./peers.json) as raw TCP addresses only.
+Current public peers are published in [`peers.json`](./peers.json) as raw TCP addresses only.
 
 ## Files
 
@@ -81,16 +82,18 @@ bps-01
 
 ## P2P Connectivity Check
 
-Run from outside the node network after firewall/NAT is open:
+Run from outside the node network after firewall/NAT is open.
 
 ```bash
 nc -vz IP_PUBLIC 26656
+nc -vz 13.229.41.228 26656
 ```
 
 PowerShell:
 
 ```powershell
 Test-NetConnection IP_PUBLIC -Port 26656
+Test-NetConnection 13.229.41.228 -Port 26656
 ```
 
 ## Operator Notes

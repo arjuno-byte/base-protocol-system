@@ -25,6 +25,8 @@ Public BPS-01 network information is published in
 - Genesis SHA-256:
   `6ff985ebd1ab87fbf579ac81b1ef1b6c9cff059018a72c5a2af5bdb3c0a184b8`
 - Core P2P: raw TCP `IP_PUBLIC:26656`
+- Public P2P peer:
+  `17c0469a361fe1e9ecbe11058f8d5cb030992e82@13.229.41.228:26656`
 - Core RPC: private/local only `tcp://127.0.0.1:26657`
 - Public RPC/faucet/explorer/status: optional app layer, not required for core sync
 - Snapshot: [`networks/bps-01/snapshot.md`](./networks/bps-01/snapshot.md)
@@ -94,6 +96,26 @@ On Windows PowerShell:
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\run_local_node.ps1
 ```
+
+Join the public BPS-01 network from your own machine or server:
+
+```bash
+git clone https://github.com/arjuno-byte/base-protocol-system.git
+cd base-protocol-system
+make install
+
+export BPS_HOME="$HOME/.bpsd"
+export BPS_CHAIN_ID="bps-01"
+export BPS_PUBLIC_PEER="17c0469a361fe1e9ecbe11058f8d5cb030992e82@13.229.41.228:26656"
+
+bpsd init "my-bps-node" --chain-id "$BPS_CHAIN_ID" --home "$BPS_HOME"
+cp networks/bps-01/genesis.json "$BPS_HOME/config/genesis.json"
+sha256sum "$BPS_HOME/config/genesis.json"
+cat networks/bps-01/genesis.sha256
+```
+
+Continue with the full node guide:
+[`networks/bps-01/full-node.md`](./networks/bps-01/full-node.md).
 
 ## Repository Layout
 
