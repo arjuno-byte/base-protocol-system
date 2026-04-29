@@ -45,6 +45,7 @@ Public BPS-01 network information is published in
 - Build, test, lint, issue, and release automation
 - Local development helper scripts in `scripts/`
 - Public network, tokenomics, release, and operator policy documents
+- Optional Windows validator dashboard in `apps/bps_validator_terminal/`
 
 ## What Is Not Included
 
@@ -121,6 +122,7 @@ Continue with the full node guide:
 
 ```text
 app/                 Cosmos SDK application wiring
+apps/                Optional desktop tools for node operators
 cmd/bpsd/            Node binary entrypoint and CLI commands
 docs/                Generated API docs and templates
 proto/               Protobuf service and message definitions
@@ -154,6 +156,7 @@ Helpful references:
 - `docs/chain-registry.md` for ecosystem metadata
 - `docs/release-checklist.md` for release preparation
 - `docs/static/openapi.json` for generated API metadata
+- `apps/bps_validator_terminal/README.md` for the Windows validator dashboard
 - `TOKENOMICS.md` for public BPS supply and genesis allocation details
 - `networks/bps-01/README.md` for public network join information
 - `BUG_BOUNTY.md` for responsible disclosure scope
